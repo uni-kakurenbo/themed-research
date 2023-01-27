@@ -11,12 +11,16 @@ cases = int(input())
 
 n_max, m_max = map(int, input().split())
 
+path = "cases/{}/seeds.txt".format(case_type);
+
+try:
+    open(path, 'x').close()
+except FileExistsError:
+    pass
+
+file = open(path, 'w')
+
 for i in range(cases):
-    path = "cases/{}/case-{}".format(case_type, str(i).zfill(5));
-    try:
-        open(path, 'x').close()
-    except FileExistsError:
-        pass
-    file = open(path, 'w')
-    file.write(" ".join(gen(n_max, m_max)))
-    file.close()
+    file.write(" ".join(gen(n_max, m_max)) + "\n")
+
+file.close()
